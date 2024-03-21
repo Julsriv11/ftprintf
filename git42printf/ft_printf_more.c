@@ -6,7 +6,7 @@
 /*   By: jarias-i <jarias-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:17:09 by jarias-i          #+#    #+#             */
-/*   Updated: 2024/03/21 10:40:34 by jarias-i         ###   ########.fr       */
+/*   Updated: 2024/03/21 12:52:45 by jarias-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ int	print_ptr(uintptr_t ptr)
 int	print_num(int x)
 {
 	int		len;
-	long	nb;
 
-	nb = x;
 	len = 0;
-	if (nb == -2147483648)
+	if (x == -2147483648)
 	{
 		write(1, "-2147483648", 11);
 		return (11);
