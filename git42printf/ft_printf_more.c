@@ -3,37 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_more.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juliaariasiniesta <juliaariasiniesta@st    +#+  +:+       +#+        */
+/*   By: jarias-i <jarias-i@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 13:17:09 by jarias-i          #+#    #+#             */
-/*   Updated: 2024/03/20 15:02:55 by juliaariasi      ###   ########.fr       */
+/*   Updated: 2024/03/21 10:40:34 by jarias-i         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int     print_ptr(uintptr_t ptr)
+int	print_ptr(uintptr_t ptr)
 {
 	char	*base;
 	int		amount;
 
-	base = "0123456789abcdef";	//representación de los dígitos hexadecimales
-	amount = 0;	//cuenta los char que se escribirán
-	if (ptr < 16)	//si el valor pasado es inferior a su base, es decir = 16, se esta tratando con un solo dígito hexadecimal
-		amount += print_c(base[ptr]);	//se escribe este dígito en la salida y el resultado se acumula en amount
-	else	//si por el contrario es mayor a 16, se hará una llamada recursiva de la función para ir diviendo por 16
+	base = "0123456789abcdef";
+	amount = 0;
+	if (ptr < 16)
+		amount += print_c(base[ptr]);
+	else
 	{
-		amount += print_ptr(ptr / 16);	//se imprimen en orden correcto <=> de + significativo a menos
-		amount += print_c(base[ptr % 16]);	//se escribe el resto de la división y también se acumula en amount
+		amount += print_ptr(ptr / 16);
+		amount += print_c(base[ptr % 16]);
 	}
 	return (amount);
 }
 
-int print_num(int x)
+int	print_num(int x)
 {
-    int		len;
+	int		len;
 	long	nb;
-    
+
 	nb = x;
 	len = 0;
 	if (nb == -2147483648)
@@ -53,10 +53,10 @@ int print_num(int x)
 		len += print_num(x / 10);
 		len += print_c(x % 10 + '0');
 	}
-    return (len);
+	return (len);
 }
 
-int     print_unsigned(unsigned int n)
+int	print_unsigned(unsigned int n)
 {
 	int	len;
 
@@ -71,7 +71,7 @@ int     print_unsigned(unsigned int n)
 	return (len);
 }
 
-int     print_hexadecimal(unsigned int hex, char *base)
+int	print_hex(unsigned int hex, char *base)
 {
 	int	len;
 
@@ -80,7 +80,7 @@ int     print_hexadecimal(unsigned int hex, char *base)
 		len += print_c(base[hex]);
 	else
 	{
-		len += print_hexadecimal(hex / 16, base);
+		len += print_hex(hex / 16, base);
 		len += print_c(base[hex % 16]);
 	}
 	return (len);
